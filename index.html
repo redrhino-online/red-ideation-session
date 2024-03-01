@@ -20,7 +20,9 @@
 
         .reveal {
             font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-            font-size: 28px;
+            /* clamp: floor 17px on the narrowest phones, ~28px on desktop,
+               measured against the real viewport (canvas is viewport-sized) */
+            font-size: clamp(20px, 1.35vw + 12px, 28px);
         }
 
         .reveal .slides { text-align: left; }
@@ -31,6 +33,13 @@
             letter-spacing: 0;
             color: var(--ink);
             font-weight: 600;
+        }
+
+        .reveal .slides section {
+            box-sizing: border-box;
+            padding: clamp(0.5em, 1.6vw, 1.2em);
+            padding-bottom: max(clamp(0.5em, 1.6vw, 1.2em), env(safe-area-inset-bottom));
+            padding-top: max(clamp(0.5em, 1.6vw, 1.2em), env(safe-area-inset-top));
         }
 
         .kicker {
@@ -49,12 +58,12 @@
             color: var(--muted);
             margin: 0.3em auto 0;
             max-width: 24em;
-            font-size: 0.72em;
+            font-size: 0.8em;
             line-height: 1.5;
         }
         .reveal .title-slide .toc {
             margin: 1.3em auto 0;
-            font-size: 0.62em;
+            font-size: 0.72em;
             color: var(--muted);
             border-top: 1px solid var(--line);
             padding-top: 1em;
@@ -68,12 +77,12 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            margin-bottom: 0.5em;
+            margin-bottom: 0.38em;
         }
         .dialogue .turn.right { align-items: flex-end; }
         .dialogue .who {
             font-family: "SFMono-Regular", Consolas, monospace;
-            font-size: 0.45em;
+            font-size: 0.55em;
             letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--muted);
@@ -82,9 +91,9 @@
         .dialogue .turn.right .who { color: var(--accent-soft); }
         .dialogue .bubble {
             max-width: 80%;
-            padding: 0.4em 0.75em;
+            padding: 0.32em 0.7em;
             border-radius: 0.4em;
-            font-size: 0.68em;
+            font-size: 0.78em;
             line-height: 1.5;
             background: var(--panel);
             color: var(--ink);
@@ -104,17 +113,17 @@
             display: block;
         }
         .reveal .stage-head h2 { font-size: 1.2em; margin: 0.25em 0 0.3em; }
-        .reveal .stage-head .stage-sub { color: var(--muted); font-size: 0.62em; max-width: 26em; margin: 0 auto; line-height: 1.5; }
+        .reveal .stage-head .stage-sub { color: var(--muted); font-size: 0.7em; max-width: 26em; margin: 0 auto; line-height: 1.5; }
 
         .summary { width: 100%; }
         .summary .row {
             display: flex;
             align-items: baseline;
             gap: 0.7em;
-            padding: 0.45em 0;
+            padding: 0.32em 0;
             border-bottom: 1px solid var(--line);
-            font-size: 0.66em;
-            line-height: 1.45;
+            font-size: 0.72em;
+            line-height: 1.5;
         }
         .summary .row:last-child { border-bottom: none; }
         .summary .row .label {
@@ -134,8 +143,15 @@
         .reveal .closing .sub { color: var(--muted); margin-top: 0.4em; font-size: 0.65em; line-height: 1.55; }
 
         @media (max-width: 700px) {
-            .reveal { font-size: 20px; }
             .dialogue .bubble { max-width: 88%; }
+        }
+        @media (max-height: 460px) {
+            .reveal { font-size: 17px; }
+            .dialogue .bubble { padding: 0.22em 0.6em; }
+            .dialogue .turn { margin-bottom: 0.22em; }
+            .dialogue .who { margin: 0; }
+            .kicker { margin-bottom: 0.25em; }
+            .reveal .slides section { padding: 0.25em clamp(0.5em, 1.6vw, 1.2em); }
         }
     </style>
 </head>
@@ -170,17 +186,25 @@
                 <aside class="notes">Stage R covers four modules: ideal client, offer currency, marketing message, curriculum.</aside>
             </section>
 
-            <!-- 4 · R: client + currency -->
+            <!-- 4 · R: ideal client -->
             <section>
                 <p class="kicker">Stage R · Reveal Your Offer</p>
                 <div class="dialogue">
                     <div class="turn right"><p class="who">Consultant</p><p class="bubble">Who does the practice serve best? Not the widest audience — the one that gets the strongest result from your work.</p></div>
                     <div class="turn"><p class="who">Client</p><p class="bubble">I've kept it broad so far. Officially, anyone growing a business.</p></div>
                     <div class="turn right"><p class="who">Consultant</p><p class="bubble">Broad messaging reads as generic, so it gets ignored. We'll define the client profile specifically — role, frustrations, what they've already tried. It narrows the copy and sharpens it at the same time.</p></div>
+                </div>
+                <aside class="notes">Module 1. Specific client profile: role, frustrations, prior attempts.</aside>
+            </section>
+
+            <!-- 5 · R: currency -->
+            <section>
+                <p class="kicker">Stage R · Reveal Your Offer</p>
+                <div class="dialogue">
                     <div class="turn right"><p class="who">Consultant</p><p class="bubble">Next: what does a client actually walk away with? Not sessions — the result. Time back, clearer positioning, revenue they can point to. That's the currency of the offer, and it's what the marketing should name.</p></div>
                     <div class="turn"><p class="who">Client</p><p class="bubble">Time and confidence in their pricing. I hadn't written that down before.</p></div>
                 </div>
-                <aside class="notes">Modules 1–2. Specific client profile, then the offer stated as a result. This gives all downstream copy its vocabulary.</aside>
+                <aside class="notes">Module 2. The offer stated as a result — the currency. Gives all downstream copy its vocabulary.</aside>
             </section>
 
             <!-- 5 · R: message + curriculum -->
@@ -318,16 +342,24 @@
 
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
     <script>
-        Reveal.initialize({
+        const deck = new Reveal({
             hash: true,
             slideNumber: 'c/t',
             transition: 'fade',
             transitionSpeed: 'fast',
             progress: true,
-            width: 1240,
-            height: 700,
-            margin: 0.06,
+            width: window.innerWidth || 1240,
+            height: window.innerHeight || 700,
+            margin: 0,
         });
+        deck.initialize();
+        // Keep the canvas matched to the real viewport so Reveal never
+        // scales the deck down; font sizes stay physically readable.
+        function fitDeck() {
+            deck.configure({ width: window.innerWidth, height: window.innerHeight });
+        }
+        window.addEventListener('resize', fitDeck);
+        window.addEventListener('orientationchange', fitDeck);
     </script>
 </body>
 </html>
