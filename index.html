@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="The RED Method, presented as a replayed consultation between a consultant and a coaching client — both roles played by the same practitioner." />
+    <title>The RED Method — A Consultation, Replayed</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+    <style>
+        :root {
+            --rr-red: #c23b3b;
+            --rr-red-soft: #e05a5a;
+            --rr-ink: #ece8e2;
+            --rr-muted: #9a938b;
+            --rr-client: #2e3440;
+            --rr-line: #3a4150;
+        }
+
+        .reveal {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 30px;
+        }
+
+        .reveal .slides {
+            text-align: left;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: Georgia, serif;
+            text-transform: none;
+            letter-spacing: 0.01em;
+            color: var(--rr-ink);
+        }
+
+        .kicker {
+            font-family: "Courier New", monospace;
+            font-size: 0.62em;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--rr-red-soft);
+            margin-bottom: 0.6em;
+        }
+
+        .reveal .title-slide { text-align: center; }
+        .reveal .title-slide h1 { font-size: 1.9em; margin-bottom: 0.2em; }
+        .reveal .title-slide .red { color: var(--rr-red-soft); }
+        .reveal .title-slide .sub { color: var(--rr-muted); font-style: italic; margin-top: 0.4em; }
+        .reveal .title-slide .form-note {
+            margin: 1.4em auto 0;
+            max-width: 26em;
+            font-size: 0.68em;
+            color: var(--rr-muted);
+            border-top: 1px solid var(--rr-line);
+            padding-top: 0.9em;
+        }
+
+        /* ---- Dialogue slides ---- */
+        .dialogue { width: 100%; }
+        .dialogue .turn {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 0.55em;
+        }
+        .dialogue .turn.right { align-items: flex-end; }
+        .dialogue .who {
+            font-family: "Courier New", monospace;
+            font-size: 0.5em;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--rr-muted);
+            margin: 0 0 0.2em 0.2em;
+        }
+        .dialogue .bubble {
+            max-width: 78%;
+            padding: 0.45em 0.8em;
+            border-radius: 0.45em;
+            font-size: 0.72em;
+            line-height: 1.45;
+            background: var(--rr-client);
+            color: var(--rr-ink);
+            border: 1px solid var(--rr-line);
+        }
+        .dialogue .turn.right .bubble {
+            background: linear-gradient(135deg, #7d2626, #5d1a1a);
+            border-color: var(--rr-red);
+        }
+        .dialogue .turn.right .who { color: var(--rr-red-soft); }
+        .dialogue .beat {
+            font-size: 0.55em;
+            color: var(--rr-muted);
+            font-style: italic;
+            margin: 0.4em 0 0.55em 0.2em;
+        }
+
+        .reveal .stage-head { text-align: center; }
+        .reveal .stage-head .letter {
+            font-size: 3.2em;
+            color: var(--rr-red-soft);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.05em;
+        }
+        .reveal .stage-head h2 { font-size: 1.35em; margin-bottom: 0.35em; }
+        .reveal .stage-head .stage-sub { color: var(--rr-muted); font-style: italic; font-size: 0.72em; }
+
+        .reveal ul.plain { list-style: none; margin-left: 0; }
+        .reveal ul.plain li { margin-bottom: 0.5em; font-size: 0.78em; line-height: 1.4; }
+        .reveal ul.plain li strong { color: var(--rr-ink); }
+        .reveal ul.plain li .mod {
+            font-family: "Courier New", monospace;
+            font-size: 0.8em;
+            color: var(--rr-red-soft);
+            margin-right: 0.5em;
+        }
+
+        .ba { display: flex; gap: 1.2em; margin-top: 0.4em; }
+        .ba .col { flex: 1; padding: 0.7em 0.9em; border-radius: 0.4em; font-size: 0.7em; line-height: 1.45; }
+        .ba .before { background: #242a35; border: 1px solid var(--rr-line); color: #b8b2aa; }
+        .ba .after { background: #241313; border: 1px solid var(--rr-red); color: var(--rr-ink); }
+        .ba .col h4 {
+            font-family: "Courier New", monospace;
+            font-size: 0.72em;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin: 0 0 0.45em;
+        }
+        .ba .before h4 { color: #8f887f; }
+        .ba .after h4 { color: var(--rr-red-soft); }
+
+        .deliverables { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55em 1em; }
+        .deliverables .item {
+            border: 1px solid var(--rr-line);
+            border-radius: 0.35em;
+            padding: 0.5em 0.8em;
+            font-size: 0.66em;
+            line-height: 1.4;
+            background: #232833;
+        }
+        .deliverables .item strong { color: var(--rr-red-soft); display: block; margin-bottom: 0.15em; }
+
+        .reveal .closing { text-align: center; }
+        .reveal .closing h2 { font-size: 1.5em; }
+        .reveal .closing .red { color: var(--rr-red-soft); }
+        .reveal .closing .sub { color: var(--rr-muted); font-style: italic; margin-top: 0.5em; font-size: 0.72em; }
+
+        .reveal .aside-note { font-size: 0.6em; color: var(--rr-muted); margin-top: 0.9em; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- 1 · Title -->
+            <section class="title-slide">
+                <p class="kicker">A marketing framework, presented as a conversation</p>
+                <h1>The <span class="red">R·E·D</span> Method</h1>
+                <p class="sub">How coaches, consultants, and solopreneurs make it easy to understand, easy to buy, and easy to scale what they sell.</p>
+                <p class="form-note">
+                    What follows is a consultation, replayed: a consultant and a coaching client,
+                    working the method end to end. Both roles are played by the same practitioner —
+                    the consultant, following his own medicine.
+                </p>
+                <aside class="notes">Frame it: this is a model enrollment conversation. The method has three acts — Reveal, Engage, Develop. Watch for what the consultant asks, not just what he says.</aside>
+            </section>
+
+            <!-- 2 · The client walks in -->
+            <section>
+                <p class="kicker">Act 0 · The first call</p>
+                <div class="dialogue">
+                    <div class="turn"><p class="who">Client</p><p class="bubble">I run a coaching practice. I'm good at the work — my clients get results. But the business side feels like guesswork. I post when I remember, I email when I have something to say, and every so often someone books a call out of nowhere.</p></div>
+                    <div class="beat">The consultant writes three words on a pad.</div>
+                    <div class="turn right"><p class="who">Consultant</p><p class="bubble">You don't have one problem. You have three wearing a trench coat: you can't see <em>who</em> you're for, you don't have a path that turns interest into commitment, and you have no engine that brings people back tomorrow. Guesswork isn't a character flaw — it's what's left when those three are invisible.</p></div>
+                    <div class="turn"><p class="who">Client</p><p class="bubble">So where do we start?</p></div>
+                    <div class="turn right"><p class="who">Consultant</p><p class="bubble">With the only question that matters. Not "how do I get more traffic?" — but: <strong>what exactly are you selling, and to whom?</strong> Act one.</p></div>
+                </div>
+                <aside class="notes">Method note: diagnose before prescribing. The three struggles map to the three stages — audience clarity, conversion, traffic. Never sell a solution to an unnamed problem.</aside>
+            </section>
+
+            <!-- 3 · Act I cover -->
+            <section class="stage-head">
+                <span class="letter">R</span>
+                <h2>Reveal Your Offer</h2>
+                <p class="stage-sub">Act I — clarity and precision about what you sell and who it's for.</p>
+                <aside class="notes">Stage R: four modules — ideal client, offer's currency, marketing messages, coaching curriculum.</aside>
+            </section>
+
+            <!-- 4 · R dialogue: ideal client -->
+            <section>
+                <p class="kicker">Act I · Reveal Your Offer</p>
+                <div class="dialogue">
+                    <div class="turn right"><p class="who">Consultant</p><p class="bubble">Who benefits <em>most</em> from your work?</p></div>
+                    <div class="turn"><p class="who">Client</p><p class="bubble">Anyone who wants to grow their business, really. I don't want to exclude anyone.</p></div>
+                    <div class="beat">The consultant nods slowly, the way you do before bad news.</div>
+                    <div class="turn right"><p class="who">Consultant</p><p class="bubble">"Anyone" is why your message lands with no one. Pick the person who gets the <strong>most</strong> from you — their frustrations, their ambitions, what they've already tried. That's not a limitation. That's a magnet.</p></div>
+                    <div class="turn right"><p class="who">Consultant</p><p class="bubble">Second question: what's the <strong>currency</strong> you're actually selling? Not "sessions" — what do clients walk away holding? Reclaimed hours? Confidence? Revenue they can point at?</p></div>
+                    <div class="turn"><p class="who">Client</p><p class="bubble">…Time, mostly. And the confidence to charge what they're worth. Huh. I've never written that down.</p></div>
+                </div>
+                <aside class="notes">Method note: modules 1–2. The ideal client is a magnet, not a restriction. The "currency" exercise converts features into the value clients actually buy.</aside>
+            </section>
+
+            <!-- 5 · R dialogue: message + curriculum -->
+            <section>
+                <p class="kicker">Act I · Reveal Your Offer</p>
+                <div class="dialogue">
+                    <div class="turn right"><p class="who">Consultant</p><p class="bubble">Last test: if I called three of your past clients and asked what changed for them, would I hear the same sentence three times?</p></div>
+                    <div class="turn"><p class="who">Client</p><p class="bubble">Honestly? I'd probably hear three different answers.</p></div>
+                    <div class="turn right"><p class="who">Consultant</p><p class="bubble">Then we write the sentence <em>for</em> them — one message, in their words, that your website and your emails can repeat until it's true. And while we're at it: walk me through your program, end to end. We'll organize it into a curriculum a stranger could follow — so it's easy to understand, easy to consume, and easy to say yes to.</p></div>
+                </div>
+                <aside class="notes">Method note: modules 3–4. Unique messaging + organized curriculum = the offer is now commercializable IP: easy to understand, easy to sell, easy to scale.</aside>
+            </section>
+
+            <!-- 6 · R before/after -->
+            <section>
+                <p class="kicker">Act I · The transformation</p>
+                <div class="ba">
+                    <div class="col before">
+                        <h4>Before</h4>
+                        A scattergun approach. Generic messages that resonate with no one in particular. Clients who are a stretch to serve. Marketing that feels like shouting into a crowded room — and the quiet suspicion of being left behind.
+                    </div>
+                    <div class="col after">
+                        <h4>After</h4>
+                        A laser picture of the ideal client. A value proposition in one breath. Messages that make the right people feel <em>seen</em>. A program a stranger could follow — and want to join.
+                    </div>
+                </div>
+                <aside class="notes">Stage R closes when the offer is easy to understand and easy to say yes to. Everything downstream inherits this clarity.</aside>
+            </section>
+
+            <!-- 7 · Act II cover -->
+            <section class="stage-head">
+                <span class="letter">E</span>
+                <h2>Engage and Convert</h2>
+                <p class="stage-sub">Act II — a path that turns interest into commitment, without pressure.</p>
+                <aside class="notes">Stage E: three modules — lead magnet, sales funnel, prescriptive sales process.</aside>
+            </section>
+
+            <!-- 8 · E dialogue: magnet + funnel -->
+            <section>
+                <p class="kicker">Act II · Engage and Convert</p>
+                <div class="dialogue">
+                    <div class="turn right"><p class="who">Consultant</p><p class="bubble">Someone just discovered you. What do they get?</p></div>
+                    <div class="turn"><p class="who">Client</p><p class="bubble">They… could email me?</p></div>
+                    <div class="turn right"><p class="who">Consultant</p><p class="bubble">We'll build them something better — a <strong>lead magnet</strong>: one genuinely useful tool that solves a small real problem, traded for an email. It demonstrates your expertise instead of claiming it.</p></div>
+                    <div class="turn"><p class="who">Client</p><p class="bubble">And then they just… sit on my list?</p></div>
+                    <div class="turn right"><p class="who">Consultant</p><p class="bubble">Then we give them a path — a <strong>funnel</strong>: a landing page that makes one promise, a thank-you page that starts the relationship, and follow-up that earns the call. No dead ends.</p></div>
+                </div>
+                <aside class="notes">Method note: modules 1–2. The magnet attracts; the funnel guides. Every page has exactly one job.</aside>
+            </section>
+
+            <!-- 9 · E dialogue: the sales call -->
+            <section>
+                <p class="kicker">Act II · Engage and Convert</p>
+                <div class="dialogue">
+                    <div class="turn"><p class="who">Client</p><p class="bubble">Can I say the uncomfortable part? I hate selling. I either freeze or talk for forty minutes and never ask for the business.</p></div>
+                    <div class="turn right"><p class="who">Consultant</p><p class="bubble">Then we'll take the improvisation out of it. A <strong>prescriptive process</strong>: diagnose first, prescribe second — like any good clinician. You're not persuading anyone; you're determining whether you can actually help. Sometimes the honest answer is "I'm not your person" — and that answer is what makes every other yes trustworthy.</p></div>
+                    <div class="turn"><p class="who">Client</p><p class="bubble">So selling stops being a performance… and becomes an assessment.</p></div>
+                </div>
+                <aside class="notes">Method note: module 3. Pressure-free selling is a byproduct of structure, not personality. Diagnosis → prescription → invitation.</aside>
+            </section>
+
+            <!-- 10 · E before/after -->
+            <section>
+                <p class="kicker">Act II · The transformation</p>
+                <div class="ba">
+                    <div class="col before">
+                        <h4>Before</h4>
+                        Interest arrives and evaporates. A funnel that's more of a concept than a system. Sales conversations avoided, over-talked, or improvised — and decent traffic converting at a fraction of what it could.
+                    </div>
+                    <div class="col after">
+                        <h4>After</h4>
+                        A magnet worth exchanging an email for. A funnel with no dead ends. Enrollment calls that follow a process both people can trust — and a conversion rate that reflects the work you actually do.
+                    </div>
+                </div>
+                <aside class="notes">Stage E closes when interest has a reliable path to commitment. The system converts; the person just follows it.</aside>
+            </section>
+
+            <!-- 11 · Act III cover -->
+            <section class="stage-head">
+                <span class="letter">D</span>
+                <h2>Develop Your Audience</h2>
+                <p class="stage-sub">Act III — an engine that brings the right people back, tomorrow and the day after.</p>
+                <aside class="notes">Stage D: three modules — content strategy, retargeting/remarketing, paid advertising.</aside>
+            </section>
+
+            <!-- 12 · D dialogue: content + retargeting -->
+            <section>
+                <p class="kicker">Act III · Develop Your Audience</p>
+                <div class="dialogue">
+                    <div class="turn right"><p class="who">Consultant</p><p class="bubble">The funnel works now. But funnels are plumbing — where does the <em>water</em> come from?</p></div>
+                    <div class="turn"><p class="who">Client</p><p class="bubble">That's the part I never figure out. I post into the void.</p></div>
+                    <div class="turn right"><p class="who">Consultant</p><p class="bubble">Then we build a <strong>content strategy</strong> — social and email working from the same messages we wrote in act one, so you're never inventing something new every morning. And for everyone who visited and left? <strong>Retargeting</strong> — a quiet reminder of why they came, bringing them back for a fraction of what first contact costs.</p></div>
+                    <div class="turn"><p class="who">Client</p><p class="bubble">So the audience becomes an asset instead of an audience.</p></div>
+                </div>
+                <aside class="notes">Method note: modules 1–2. Content repurposes the act-one message; remarketing recaptures the visitors the funnel already earned.</aside>
+            </section>
+
+            <!-- 13 · D dialogue: paid ads -->
+            <section>
+                <p class="kicker">Act III · Develop Your Audience</p>
+                <div class="dialogue">
+                    <div class="turn right"><p class="who">Consultant</p><p class="bubble">Last piece: paid ads. When the funnel converts reliably, ads aren't a gamble — they're a throttle. You already know what a client is worth; you're just renting attention at a price that leaves margin. We scale what's proven instead of hoping what's new.</p></div>
+                    <div class="turn"><p class="who">Client</p><p class="bubble">First the system, then the spending. In that order.</p></div>
+                    <div class="turn right"><p class="who">Consultant</p><p class="bubble">In that order. That's the whole method.</p></div>
+                </div>
+                <aside class="notes">Method note: module 3. Ads amplify a proven funnel; they never rescue an unproven one.</aside>
+            </section>
+
+            <!-- 14 · D before/after -->
+            <section>
+                <p class="kicker">Act III · The transformation</p>
+                <div class="ba">
+                    <div class="col before">
+                        <h4>Before</h4>
+                        Posting into the void. Emails that go out on guilt, not rhythm. Visitors who never return. Growth that depends on being accidentally discovered — and ad spend that feels like a slot machine.
+                    </div>
+                    <div class="col after">
+                        <h4>After</h4>
+                        Content with a job on every channel. Visitors who get chased gently and come back. An audience that compounds — and paid traffic applied like a multiplier on a machine that already works.
+                    </div>
+                </div>
+                <aside class="notes">Stage D closes when traffic is a system, not a hope. R + E + D together form the whole engine.</aside>
+            </section>
+
+            <!-- 15 · Deliverables -->
+            <section>
+                <p class="kicker">What you walk away holding</p>
+                <h2 style="font-size:1.1em">Done for you, through guided workshops</h2>
+                <div class="deliverables">
+                    <div class="item"><strong>A visual model</strong> of your nine-step process — your expertise, instantly communicable.</div>
+                    <div class="item"><strong>A custom lead magnet</strong> drawn from your own program, built to attract your ideal client.</div>
+                    <div class="item"><strong>A training video script</strong> for a hybrid thank-you page that builds authority on contact.</div>
+                    <div class="item"><strong>An enrollment blueprint</strong> — a diagnosis-and-prescription call process, without the pressure.</div>
+                    <div class="item"><strong>A 27-email nurture sequence</strong> that stays useful until the timing is right.</div>
+                    <div class="item"><strong>Ten KPIs</strong> to measure before and after — so the growth is provable, not anecdotal.</div>
+                </div>
+                <aside class="notes">The deliverables make the method tangible: IP that's easy to understand, easy to consume, easy to sell, easy to scale.</aside>
+            </section>
+
+            <!-- 16 · Closing -->
+            <section class="closing">
+                <p class="kicker">The consultation ends</p>
+                <h2>Simple. Powerful.<br /><span class="red">Focused on results.</span></h2>
+                <p class="sub">Reveal the offer. Engage and convert. Develop the audience.<br />In that order — because every step builds on the one before it.</p>
+                <aside class="notes">Close on the sequence, not the slogans. R before E before D; the order is the method.</aside>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            transition: 'fade',
+            transitionSpeed: 'fast',
+            progress: true,
+            width: 1240,
+            height: 700,
+            margin: 0.06,
+        });
+    </script>
+</body>
+</html>
